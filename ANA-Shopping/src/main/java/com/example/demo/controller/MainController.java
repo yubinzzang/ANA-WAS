@@ -29,9 +29,15 @@ import com.example.demo.model.ProductInfo;
 import com.example.demo.pagination.PaginationResult;
 import com.example.demo.utils.Utils;
 import com.example.demo.validator.CustomerFormValidator;
+import javax.servlet.http.HttpSession;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+
+
 
 @Controller
 @Transactional
+//@EnableRedisHttpSession
+
 public class MainController {
  
    @Autowired

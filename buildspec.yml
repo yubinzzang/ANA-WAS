@@ -7,17 +7,22 @@ phases:
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
       - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+      - aws s3 cp s3://ana-service-log-bucket22/was_ver_number .
+      - export WAS_VER=$(cat was_ver_number)
+      - export WAS_VER=$(echo `expr $WAS_VER + 1`)
+      - echo $WAS_VER > was_ver_number
+      - aws s3 cp was_ver_number s3://ana-service-log-bucket22/was_ver_number
   build:
     commands:
       - echo Build started on 'date'
       - echo Building the Docker image...
       - docker build -t $IMAGE_REPO_NAME .
-      - docker tag $IMAGE_REPO_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker tag $IMAGE_REPO_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:was.V$WAS_VER
   post_build:
     commands:
       - echo Build completed on 'date'
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:was.V$WAS_VER
 cache:
   paths:
     - '/root/.m2/**/*'
