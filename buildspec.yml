@@ -11,7 +11,7 @@ phases:
       - export WAS_VER=$(cat was_ver_number)
       - export WAS_VER=$(echo `expr $WAS_VER + 1`)
       - echo $WAS_VER > was_ver_number
-      - aws s3 cp was_ver_number s3://ana-service-log-bucket22/was_ver_number
+      - aws s3 cp was_ver_number s3://yubin0912/was_ver_number
   build:
     commands:
       - echo Build started on 'date'
