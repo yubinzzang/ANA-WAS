@@ -1,6 +1,0 @@
-spring:
-  redis:
-    host: anaredis.smrf3q.0001.apn2.cache.amazonaws.com
-    port: 6379
-    session:
-      store-type: redis

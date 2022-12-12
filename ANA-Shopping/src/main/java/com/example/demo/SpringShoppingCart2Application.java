@@ -18,19 +18,15 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
-import javax.servlet.http.HttpSession;
+@SpringBootApplication
 
-import org.springframework.session.data.redis.config.ConfigureRedisAction;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-
-@SpringBootApplication(exclude = { //
+@EnableAutoConfiguration(exclude = { //  
         DataSourceAutoConfiguration.class, //
         DataSourceTransactionManagerAutoConfiguration.class, //
         HibernateJpaAutoConfiguration.class })
-@EnableRedisHttpSession
 
 public class SpringShoppingCart2Application {
-
+	
 
     @Autowired
     private Environment env;
@@ -38,10 +34,7 @@ public class SpringShoppingCart2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringShoppingCart2Application.class, args);
 	}
-    @Bean
-    ConfigureRedisAction configureRedisAction() {
-        return ConfigureRedisAction.NO_OP;
-    }
+	
 	@Bean(name = "dataSource")
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

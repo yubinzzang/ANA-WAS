@@ -6,7 +6,6 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -29,10 +28,8 @@ import com.example.demo.model.OrderInfo;
 import com.example.demo.pagination.PaginationResult;
 import com.example.demo.validator.ProductFormValidator;
 
-
 @Controller
 @Transactional
-//@EnableRedisHttpSession
 public class AdminController {
  
    @Autowired
